@@ -51,7 +51,7 @@ namespace MenuAPI.Controllers
         [HttpPut]      
         [Route("UpdateData")]
         [Consumes("application/x-www-form-urlencoded")]
-        public object Update([FromBody] Model.Menu menu)
+        public object Update([FromForm] Model.Menu menu)
         {
             con.Open();
             if(menu == null)
@@ -60,7 +60,7 @@ namespace MenuAPI.Controllers
             }
             else
             {
-                SqlCommand com = new SqlCommand("UPDATE MsMenu SET name = '" + menu.Name + "', description = '" + menu.Description + "', price = '" + menu.Price + "' WHERE id LIKE '" + menu.Id + "'", con);
+                SqlCommand com = new SqlCommand("UPDATE MsMenu SET name = '" + menu.Name + "', description = '" + menu.Description + "', price = '" + menu.Price + "' WHERE id = '" + menu.Id + "'", con);
                 com.ExecuteNonQuery();
 
                 return Ok("Data berhasil di ubah");
